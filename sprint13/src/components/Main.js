@@ -1,26 +1,39 @@
 import avatar from '../images/Avatar.png';
 import editSign from '../images/EditSign.png';
 import PopupWithForm from './PopupWithForm';
-
 import paisagem from '../images/image1.png'
+import api from '../utils/api';
+import React from 'react';
+import Card from './Card';
 
-// function handleEditAvatarClick() {
-//     document.querySelector(".edit-profile-pic-popup").classList.add("edit-profile-pic-popup_opened");
-// }
-
-// function handleEditProfileClick() {
-//     document.querySelector(".profile-popup").classList.add("profile-popup_opened");
-// }
-
-// function handleAddPlaceClick() {
-//     document.querySelector(".new-card-popup").classList.add("new-card-popup_opened");
-// }
-
-// function handleDeleteCardClick() {
-//     document.querySelector(".delete-popup").classList.add("delete-popup_opened");
-// }
 
 function Main(props) {
+
+    const [userName, setUserName] = React.useState('');
+    const [userDescription, setUserDescription] = React.useState('');
+    const [userAvatar, setUserAvatar] = React.useState('');
+    const [cards, setCards] = React.useState([]);
+
+    React.useEffect(() => {
+        api.getUserInfo()
+        .then((result) => {
+            setUserName(result.name);
+            setUserDescription(result.about);
+            setUserAvatar(result.avatar);
+        })
+        .catch((err) => {
+            console.error("Erro ao obter Usrr Info:", err);
+        });
+
+        api.getInitialCards()
+          .then((result) => {
+            setCards(result); 
+          })
+          .catch((err) => {
+            console.error("Erro ao obter cartões iniciais:", err);
+          });
+      }, []);
+
     return (
         <main className="content">
             <PopupWithForm title="Editar Perfil" name="profile-popup" isOpen={props.isEditProfilePopupOpen} onClose={props.onClose}>
@@ -56,32 +69,28 @@ function Main(props) {
                 <button className="profile__avatar_button" onClick={props.onEditAvatarClick}>
                     <img src={editSign} alt="Edit Sign" className="profile__avatar_edit"></img>
                     <img
-                    src={avatar}
+                    src={`${userAvatar}`}
                     alt="Avatar Image"
                     className="profile__avatar"
                     ></img>
                 </button>
                 <div className="profile__info">
-                    <h1 className="profile__info-title">Cousteau</h1>
+                    <h1 className="profile__info-title">{userName}</h1>
                     <button className="profile__info-edit-button" onClick={props.onEditProfileClick}></button>
-                    <p className="profile__info-activity">Explorar</p>
+                    <p className="profile__info-activity">{userDescription}</p>
                 </div>
                 <button className="profile__add-button" onClick={props.onAddPlaceClick}></button>
             </section>
             <section className="elements" id="elements">
-            <div className="card">
-                <button className="card__delete-button" onClick={props.onDeleteCardClick}></button>
-                <button className="card__image-link">
-                    <img className="card__image" src={paisagem}/>
-                </button>
-                <div className="card__tag">
-                    <p className="card__tag-title">Miami</p>
-                    <div className="card__tag-likes">
-                        <button className="card__tag-like"></button>
-                        <p className="card__tag-like-count"></p>
-                    </div>
-                </div>
-            </div>
+            {cards.map((card) => {
+                return (
+                    <Card
+                        key={card._id}
+                        card={card}
+                        onDeleteCardClick={props.onDeleteCardClick}
+                    />
+                );
+            })}
             </section>
         </main>
     )

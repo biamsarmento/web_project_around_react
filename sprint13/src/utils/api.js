@@ -19,7 +19,6 @@ class Api {
           }
         })
         .then(data => {
-          console.log("Dados retornados pela API:", data); // Verifique o que a API está retornando
           return data;
         });
     }
