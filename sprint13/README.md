@@ -86,4 +86,4 @@ A mais nova atualização desse código não altera o seu funcionamento, mas nes
 Nesta nova etapa do projeto passamos a consumir uma API para salvar algumas coisas. Conseguimos usar o banco de dados através de requests feitos com um token individual. Aprendemos a interpretar o status de um request assim como o objeto que recebemos como resposta.
 Na Sprint 13 reestruturamos o projeto utilizando React! Aprendemos a utilizar componentes e a criar um projeto em React do zero! 
 
-Link para o projeto: https://biamsarmento.github.io/web_project_around/
+Link para o projeto: https://biamsarmento.github.io/web_project_around_react/
