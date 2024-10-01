@@ -1,7 +1,7 @@
 import avatar from '../images/Avatar.png';
 import editSign from '../images/EditSign.png';
 import PopupWithForm from './PopupWithForm';
-import PopupWithImage from './PopupWithImage';
+import ImagePopup from './ImagePopup';
 import paisagem from '../images/image1.png'
 import api from '../utils/api';
 import React from 'react';
@@ -59,7 +59,7 @@ function Main(props) {
                 <span className="form__input-error url-error"></span>
                 <button type="submit" className="form__submit-button">Salvar</button>
             </PopupWithForm>
-            <PopupWithImage card={props.selectedCard} onClose={props.onClose}></PopupWithImage>
+            <ImagePopup card={props.selectedCard} onClose={props.onClose}></ImagePopup>
             <section className="profile" id="profile">
                 <button className="profile__avatar_button" onClick={props.onEditAvatarClick}>
                     <img src={editSign} alt="Edit Sign" className="profile__avatar_edit"></img>
