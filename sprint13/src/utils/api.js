@@ -1,164 +1,69 @@
 class Api {
-    constructor({baseUrl, headers}) {
+  constructor({baseUrl, headers}) {
       this.baseUrl = baseUrl;
       this.headers = headers;
-    }
-  
-    getInitialCards() {
-      return fetch(`${this.baseUrl}/cards`, {
-        method: "GET",
-        headers: {
-          authorization: this.headers.authorization,
-        }
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        })
-        .then(data => {
-          return data;
-        });
-    }
-  
-    getUserInfo() {
-      return fetch(`${this.baseUrl}/users/me`, {
-        method: "GET",
-        headers: {
-          authorization: this.headers.authorization,
-        }
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        });
-    }
-  
-    editProfile({name, about}) {
-      return fetch(`${this.baseUrl}/users/me`, {
-        method: "PATCH",
-        headers: {
-          authorization: this.headers.authorization,
-          "Content-Type": this.headers["Content-Type"],
-        },
-        body: JSON.stringify({
-          name: name,
-          about: about
-        })
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        });
-    }
-  
-    editProfilePicture({linkEditProfilePic}) {
-      return fetch(`${this.baseUrl}/users/me/avatar`, {
-        method: "PATCH",
-        headers: {
-          authorization: this.headers.authorization,
-          "Content-Type": this.headers["Content-Type"],
-        },
-        body: JSON.stringify({
-          avatar: linkEditProfilePic,
-        })
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        });
-    }
-  
-    addCard({name, link}) {
-      return fetch(`${this.baseUrl}/cards`, {
-        method: "POST",
-        headers: {
-          authorization: this.headers.authorization,
-          "Content-Type": this.headers["Content-Type"],
-        },
-        body: JSON.stringify({
-          name: name,
-          link: link
-        })
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        });
-    }
-  
-    deleteCard(cardId) {
-      return fetch(`${this.baseUrl}/cards/${cardId}`, {
-        method: "DELETE",
-        headers: {
-          authorization: this.headers.authorization,
-          // "Content-Type": this.headers["Content-Type"],
-        }
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        });
-    }
-  
-    addLike(cardId) {
-      return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-        method: "PUT",
-        headers: {
-          authorization: this.headers.authorization,
-          // "Content-Type": this.headers["Content-Type"],
-        }
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        });
-    }
-  
-    removeLike(cardId) {
-      return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-        method: "DELETE",
-        headers: {
-          authorization: this.headers.authorization,
-          // "Content-Type": this.headers["Content-Type"],
-        }
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            return Promise.reject(`Error: ${res.status}`);
-          }
-        });
-    }
+  }
+
+  _makeRequest(endpoint, method = 'GET', body = null) {
+      const options = {
+          method,
+          headers: {...this.headers}
+      };
+
+      if (body) {
+          options.headers['Content-Type'] = 'application/json'; // Corrigido 'aplication' para 'application'
+          options.body = JSON.stringify(body);
+      }
+
+      return fetch(`${this.baseUrl}${endpoint}`, options)
+          .then((res) => {
+              if (!res.ok) throw new Error(`Server ERROR: ${res.status}`);
+              return res.json();
+          })
+          .catch((error) => {
+              console.error("Error:", error);
+          });
+  }
+
+  getInitialCards() {
+      return this._makeRequest('/cards');
+  }
+
+  getUserInfo() {
+      return this._makeRequest('/users/me');
+  }
+
+  editProfile({name, about}) {
+      return this._makeRequest('/users/me', 'PATCH', { name, about });
+  }
+
+  editProfilePicture({linkEditProfilePic}) {
+      return this._makeRequest('/users/me/avatar', 'PATCH', { avatar: linkEditProfilePic });
+  }
+
+  addCard({name, link}) {
+      return this._makeRequest('/cards', 'POST', { name, link });
+  }
+
+  deleteCard(cardId) {
+      return this._makeRequest(`/cards/${cardId}`, 'DELETE');
+  }
+
+  addLike(cardId) {
+      return this._makeRequest(`/cards/likes/${cardId}`, 'PUT');
+  }
+
+  removeLike(cardId) {
+      return this._makeRequest(`/cards/likes/${cardId}`, 'DELETE');
+  }
 }
 
 const api = new Api({
-    baseUrl: "https://around.nomoreparties.co/v1/web-ptbr-cohort-13",
-    headers: {
+  baseUrl: "https://around.nomoreparties.co/v1/web-ptbr-cohort-13",
+  headers: {
       authorization: "4fe5fb1a-9a42-4631-9f7e-39eb49951a0f",
       "Content-Type": "application/json"
-    }
-  });
+  }
+});
 
 export default api;
