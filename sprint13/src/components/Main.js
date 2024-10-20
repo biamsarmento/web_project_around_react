@@ -1,30 +1,30 @@
-import avatar from '../images/Avatar.png';
 import editSign from '../images/EditSign.png';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
-import paisagem from '../images/image1.png'
 import api from '../utils/api';
 import React from 'react';
 import Card from './Card';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 
 function Main(props) {
 
-    const [userName, setUserName] = React.useState('');
-    const [userDescription, setUserDescription] = React.useState('');
-    const [userAvatar, setUserAvatar] = React.useState('');
+    // const [userName, setUserName] = React.useState('');
+    // const [userDescription, setUserDescription] = React.useState('');
+    // const [userAvatar, setUserAvatar] = React.useState('');
     const [cards, setCards] = React.useState([]);
-
+    const currentUser = React.useContext(CurrentUserContext)
+;
     React.useEffect(() => {
-        api.getUserInfo()
-        .then((result) => {
-            setUserName(result.name);
-            setUserDescription(result.about);
-            setUserAvatar(result.avatar);
-        })
-        .catch((err) => {
-            console.error("Erro ao obter Usrr Info:", err);
-        });
+        // api.getUserInfo()
+        // .then((result) => {
+        //     setUserName(result.name);
+        //     setUserDescription(result.about);
+        //     setUserAvatar(result.avatar);
+        // })
+        // .catch((err) => {
+        //     console.error("Erro ao obter Usrr Info:", err);
+        // });
 
         api.getInitialCards()
           .then((result) => {
@@ -64,15 +64,15 @@ function Main(props) {
                 <button className="profile__avatar_button" onClick={props.onEditAvatarClick}>
                     <img src={editSign} alt="Edit Sign" className="profile__avatar_edit"></img>
                     <img
-                    src={`${userAvatar}`}
-                    alt="Avatar Image"
+                    src={currentUser.avatar}
+                    alt="Avatar"
                     className="profile__avatar"
                     ></img>
                 </button>
                 <div className="profile__info">
-                    <h1 className="profile__info-title">{userName}</h1>
+                    <h1 className="profile__info-title">{currentUser.name}</h1>
                     <button className="profile__info-edit-button" onClick={props.onEditProfileClick}></button>
-                    <p className="profile__info-activity">{userDescription}</p>
+                    <p className="profile__info-activity">{currentUser.about}</p>
                 </div>
                 <button className="profile__add-button" onClick={props.onAddPlaceClick}></button>
             </section>

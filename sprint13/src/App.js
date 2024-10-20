@@ -3,6 +3,8 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import React from 'react';
 import './index.css';
+import api from './utils/api';
+import CurrentUserContext from './contexts/CurrentUserContext';
 
 function App() {
 
@@ -11,6 +13,18 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState('');
+
+  React.useEffect(() => {
+    api.getUserInfo()
+    .then((result) => {
+        setCurrentUser(result);
+    })
+    .catch((err) => {
+        console.error("Erro ao obter Usrr Info:", err);
+    });
+  }, []);
+
 
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
@@ -42,21 +56,23 @@ function App() {
 
   return (
     <div className="page">
-      <Header></Header>
-      <Main 
-        onEditProfileClick={handleEditProfileClick}
-        onAddPlaceClick={handleAddPlaceClick}
-        onEditAvatarClick={handleEditAvatarClick}
-        onDeleteCardClick={handleDeleteCardClick}
-        isEditProfilePopupOpen={isEditProfilePopupOpen}
-        isAddPlacePopupOpen={isAddPlacePopupOpen}
-        isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-        isDeleteCardPopupOpen={isDeleteCardPopupOpen}
-        selectedCard={selectedCard}
-        onClose={closeAllPopups}
-        onCardClick={handleCardClick}
-      ></Main>
-      <Footer></Footer>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header></Header>
+        <Main 
+          onEditProfileClick={handleEditProfileClick}
+          onAddPlaceClick={handleAddPlaceClick}
+          onEditAvatarClick={handleEditAvatarClick}
+          onDeleteCardClick={handleDeleteCardClick}
+          isEditProfilePopupOpen={isEditProfilePopupOpen}
+          isAddPlacePopupOpen={isAddPlacePopupOpen}
+          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+          isDeleteCardPopupOpen={isDeleteCardPopupOpen}
+          selectedCard={selectedCard}
+          onClose={closeAllPopups}
+          onCardClick={handleCardClick}
+        ></Main>
+        <Footer></Footer>
+      </CurrentUserContext.Provider>
     </div>
   );
 }

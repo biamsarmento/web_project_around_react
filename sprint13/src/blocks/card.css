@@ -30,7 +30,15 @@
   z-index: 2;
 }
 
-.card__delete-button:hover{
+.card__delete-button_visible {
+  display: block;
+}
+
+.card__delete-button_hidden {
+  display: none;
+}
+
+.card__delete-button_visible:hover{
   opacity: 60%;
 }
 
