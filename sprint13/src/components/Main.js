@@ -9,23 +9,30 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
-    // const [userName, setUserName] = React.useState('');
-    // const [userDescription, setUserDescription] = React.useState('');
-    // const [userAvatar, setUserAvatar] = React.useState('');
     const [cards, setCards] = React.useState([]);
-    const currentUser = React.useContext(CurrentUserContext)
-;
-    React.useEffect(() => {
-        // api.getUserInfo()
-        // .then((result) => {
-        //     setUserName(result.name);
-        //     setUserDescription(result.about);
-        //     setUserAvatar(result.avatar);
-        // })
-        // .catch((err) => {
-        //     console.error("Erro ao obter Usrr Info:", err);
-        // });
+    const currentUser = React.useContext(CurrentUserContext);
 
+    async function handleCardLike(card) {
+        // Verificar mais uma vez se esse cartão já foi curtido
+        const isLiked = card.likes.some(user => user._id === currentUser._id);
+        
+        // Enviar uma solicitação para a API e obter os dados do cartão atualizados
+        await api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+            setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+        }).catch((error) => console.error(error));
+    }
+
+    async function handleCardDelete(card) {
+        await api.deleteCard(card._id)
+            .then(() => {
+                setCards((state) => 
+                    state.filter((currentCard) => currentCard._id !== card._id)
+                );
+            })
+            .catch((error) => console.error(error));
+    }
+
+    React.useEffect(() => {
         api.getInitialCards()
           .then((result) => {
             setCards(result); 
@@ -83,6 +90,8 @@ function Main(props) {
                         key={card._id}
                         card={card}
                         onDeleteCardClick={props.onDeleteCardClick}
+                        onCardDelete={handleCardDelete}
+                        onCardLike={handleCardLike}
                         onCardClick={props.onCardClick}
                     />
                 );

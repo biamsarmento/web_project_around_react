@@ -49,6 +49,11 @@ class Api {
       return this._makeRequest(`/cards/${cardId}`, 'DELETE');
   }
 
+  changeLikeCardStatus(cardId, isLiked) {
+    // isLiked ? this.addLike(cardId) : this.removeLike(cardId);
+    return isLiked ? this._makeRequest(`/cards/likes/${cardId}`, 'PUT') : this._makeRequest(`/cards/likes/${cardId}`, 'DELETE');;
+  }
+
   addLike(cardId) {
       return this._makeRequest(`/cards/likes/${cardId}`, 'PUT');
   }

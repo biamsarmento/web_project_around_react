@@ -12,7 +12,8 @@
   gap: 25px;
 }
 
-.card__delete-button {
+.card__delete-button_visible {
+  display: block;
   box-sizing: border-box;
   width: 18px;
   height: 19.3px;
@@ -28,10 +29,6 @@
   margin-right: 15px;
   align-self: flex-end;
   z-index: 2;
-}
-
-.card__delete-button_visible {
-  display: block;
 }
 
 .card__delete-button_hidden {
