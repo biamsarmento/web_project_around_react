@@ -5,6 +5,7 @@ import api from '../utils/api';
 import React from 'react';
 import Card from './Card';
 import EditProfile from './EditProfile';
+import EditAvatar from './EditAvatar';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 
 
@@ -46,9 +47,8 @@ function Main(props) {
     return (
         <main className="content">
             
-            <PopupWithForm title="Editar Perfil" name="profile-popup" isOpen={props.popup} onClose={props.onClosePopup}>
-                <EditProfile onClose={props.onClosePopup}>
-                </EditProfile>
+            <PopupWithForm title="Editar Perfil" name="profile-popup" isOpen={props.isEditProfilePopupOpen} onClose={props.onClose}>
+                <EditProfile onClose={props.onClose}></EditProfile>
                 {/* <input type="text" className="form__input form__input_type_name" id="nome" name="name" minLength="2" maxLength="40" required></input>
                 <span className="form__input-error nome-error"></span>
                 <input type="text" className="form__input form__input_type_activity" id="atividade" name="about" minLength="2" maxLength="200" required></input>
@@ -61,15 +61,16 @@ function Main(props) {
                 <input type="url" className="form__input form__input_type_url" id="url" name="link" placeholder="Image URL" required></input>
                 <span className="form__input-error url-error"></span>
                 <button type="submit" className="form__submit-button">Salvar</button>
-            </PopupWithForm> 
-            <PopupWithForm title="Tem certeza?" name="delete-popup" isOpen={props.isDeleteCardPopupOpen} onClose={props.onClose}>
+            </PopupWithForm>  */}
+            {/* <PopupWithForm title="Tem certeza?" name="delete-popup" isOpen={props.isDeleteCardPopupOpen} onClose={props.onClose}>
                 <button type="submit" className="form__submit-button">Sim</button>
-            </PopupWithForm>
-            <PopupWithForm title="Alterar a foto do perfil" name="edit-profile-pic-popup" isOpen={props.isEditAvatarPopupOpen} onClose={props.onClose}>
-                <input type="url" className="form__input form__input_type_url" id="url" name="linkEditProfilePic" placeholder="https://somewebsite.com/someimage.jpg" required></input>
-                <span className="form__input-error url-error"></span>
-                <button type="submit" className="form__submit-button">Salvar</button>
             </PopupWithForm> */}
+            <PopupWithForm title="Alterar a foto do perfil" name="edit-profile-pic-popup" isOpen={props.isEditAvatarPopupOpen} onClose={props.onClose}>
+                <EditAvatar onClose={props.onClose}></EditAvatar>
+                {/* <input type="url" className="form__input form__input_type_url" id="url" name="linkEditProfilePic" placeholder="https://somewebsite.com/someimage.jpg" required></input>
+                <span className="form__input-error url-error"></span>
+                <button type="submit" className="form__submit-button">Salvar</button> */}
+            </PopupWithForm>
             <ImagePopup card={props.selectedCard} onClose={props.onClose}></ImagePopup>
             <section className="profile" id="profile">
                 <button className="profile__avatar_button" onClick={props.onEditAvatarClick}>
@@ -83,7 +84,7 @@ function Main(props) {
                 <div className="profile__info">
                     <h1 className="profile__info-title">{currentUser.name}</h1>
                     {/* <button className="profile__info-edit-button" onClick={props.onEditProfileClick}></button> */}
-                    <button className="profile__info-edit-button" onClick={props.onOpenPopup}></button>
+                    <button className="profile__info-edit-button" onClick={props.onEditProfileClick}></button>
                     <p className="profile__info-activity">{currentUser.about}</p>
                 </div>
                 <button className="profile__add-button" onClick={props.onAddPlaceClick}></button>

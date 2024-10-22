@@ -11,7 +11,7 @@ class Api {
       };
 
       if (body) {
-          options.headers['Content-Type'] = 'application/json'; // Corrigido 'aplication' para 'application'
+          options.headers['Content-Type'] = 'application/json'; 
           options.body = JSON.stringify(body);
       }
 
@@ -37,8 +37,8 @@ class Api {
       return this._makeRequest('/users/me', 'PATCH', { name, about });
   }
 
-  editProfilePicture({linkEditProfilePic}) {
-      return this._makeRequest('/users/me/avatar', 'PATCH', { avatar: linkEditProfilePic });
+  editProfilePicture({avatar}) {
+      return this._makeRequest('/users/me/avatar', 'PATCH', { avatar });
   }
 
   addCard({name, link}) {
