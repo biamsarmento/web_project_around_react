@@ -20,7 +20,7 @@ function Main(props) {
                 <EditProfile onClose={props.onClose}></EditProfile>
             </PopupWithForm> 
             <PopupWithForm title="Novo Local" name="new-card-popup" isOpen={props.isAddPlacePopupOpen} onClose={props.onClose}>
-                <NewCard onClose={props.onClose}></NewCard>
+                <NewCard onClose={props.onClose} onAddPlaceSubmit={props.onAddPlaceSubmit}></NewCard>
             </PopupWithForm> 
             <PopupWithForm title="Tem certeza?" name="delete-popup" isOpen={props.isDeleteCardPopupOpen} onClose={props.onClose}>
                 <button type="submit" className="form__submit-button">Sim</button>

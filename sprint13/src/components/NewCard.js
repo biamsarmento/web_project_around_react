@@ -1,10 +1,6 @@
-import { useState, useContext } from 'react'; 
-import CurrentUserContext from '../contexts/CurrentUserContext'; 
+import { useState } from 'react'; 
 
 export default function NewCard(props) {
-
-  const cardContext = useContext(CurrentUserContext); // Obtém o objeto de usuário atual
-  const { handleAddPlaceSubmit } = cardContext;
 
   const [title, setTitle] = useState(''); 
   const [link, setLink] = useState(''); 
@@ -19,7 +15,7 @@ export default function NewCard(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddPlaceSubmit({name: title, link});
+    props.onAddPlaceSubmit({name: title, link});
     setTitle('');
     setLink('');
     props.onClose();
