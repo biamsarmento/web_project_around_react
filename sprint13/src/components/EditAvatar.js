@@ -3,8 +3,7 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 
 export default function EditAvatar(props) {
   const avatarRef = useRef(); 
-  const userContext = useContext(CurrentUserContext); 
-  const { handleUpdateAvatar } = userContext; 
+  const { handleUpdateAvatar } = useContext(CurrentUserContext); 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -16,14 +15,14 @@ export default function EditAvatar(props) {
   }
 
   return (
-    <form className="edit-profile-pic-popup__form form" onSubmit={handleSubmit} noValidate>
+    <form className="edit-profile-pic-popup__form form" onSubmit={handleSubmit}>
       <fieldset className="form__fieldset">
         <input
           type="url"
           className="form__input form__input_type_url"
           id="url"
           name="linkEditProfilePic"
-          placeholder="https://somewebsite.com/someimage.jpg"
+          placeholder="insira a url aqui"
           ref={avatarRef} 
           required
         />

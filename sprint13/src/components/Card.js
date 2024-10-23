@@ -5,19 +5,19 @@ function Card(props) {
 
     const {currentUser} = React.useContext(CurrentUserContext);
 
-    // Verificando se o usuário atual é o dono do cartão atual
+    
     const isOwn = props.card.owner._id === currentUser._id;
 
-    // Criando uma variável que você definirá em `className` para o botão delete
+    
     const cardDeleteButtonClassName = (
-    // `card__delete-button_visible ${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
+    
     `${isOwn ? 'card__delete-button_visible' : 'card__delete-button_hidden'}`
     );
 
-    // Verifique se o cartão foi curtido pelo usuário atual
+    
     const isLiked = props.card.likes.some(i => i._id === currentUser._id);
 
-    // Criw uma variável que possa ser definida em `className` para o botão de curtir
+    
     const cardLikeButtonClassName = (
         `${isLiked ? 'card__tag-like card__tag-like_liked' : 'card__tag-like'}`
     );
