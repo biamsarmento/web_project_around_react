@@ -5,10 +5,10 @@ export default function EditAvatar(props) {
   const avatarRef = useRef(); 
   const { handleUpdateAvatar } = useContext(CurrentUserContext); 
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
   
-    handleUpdateAvatar({
+    await handleUpdateAvatar({
         avatar: avatarRef.current.value,
     });
     props.onClose();
