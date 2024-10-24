@@ -27,7 +27,7 @@ export default function NewCard(props) {
     name="formNewCard"
     id="new-card-popup__form" 
     onSubmit={handleSubmit}
-    noValidate>
+    >
         <fieldset
         className="form__fieldset">
             <input 
