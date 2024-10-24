@@ -21,11 +21,10 @@ export default function EditProfile(props) {
     setDescription(event.target.value); 
   };
 
-  const handleSubmit = (event) => {
+  async function handleSubmit(event) {
     event.preventDefault(); 
 
-    // Ele não me deixou colocar await aqui pois a função não é assincrona.
-    handleUpdateUser({ name, about: description }); 
+    await handleUpdateUser({ name, about: description }); 
     props.onClose();
   };
 
