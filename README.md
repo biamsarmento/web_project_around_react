@@ -1,16 +1,44 @@
-# Triple Ten
-# Web Project Around
+# 📸 Project Around React
 
-Esse site mostra um perfil de um usuário e mostra fotos postadas por este. Existe uma seção "profile" 
-que mostra o nome e uma descrição do usuário com um botão para editar o perfil e existe uma seção com as fotos postadas pelo usuário. 
-Em cada post há um texto e um botão de like, que ao ser clicado fica preenchido.
-Também podemos acrescentar e deletar fotos ná página clicando no botão + e no lixo, respectivamente.
-Foi acrescentada, também, a funcionalidade de fechar os popup clicando fora dele ou então apertando em Esc.
-Os formulários agora passam por uma validação e o botão "Salvar" so funciona quando tudo está válido.
-Agora esse projeto foi devidamente organizado e classes foram criadas após aprendermos POO.
-Uma nova atualização desse código não altera o seu funcionamento, mas nessa Sprint nós aprofundamos ainda mais o nosso conhecimento em POO. Várias classes novas foram criadas e implementadas e ainda por cima usamos Node para carregar o projeto automaticamente.
-Na etapa anterior do projeto passamos a consumir uma API para salvar algumas coisas. Conseguimos usar o banco de dados através de requests feitos com um token individual. Aprendemos a interpretar o status de um request assim como o objeto que recebemos como resposta.
-Na Sprint 13 reestruturamos o projeto utilizando React! Aprendemos a utilizar componentes e a criar um projeto em React do zero! 
-Na Sprint 14 aprofundamos nosso conhecimento em JavaScript e React. Aprendemos a usar contexto para possibilitar que as diferentes partes do código tivessem acesso a mesma informação, mesmo se ela mudar, e também aprendemos Refs, uma forma de obter dados do usuário.
+## 📖 About the Project
 
-Link para o projeto: https://biamsarmento.github.io/web_project_around_react/
+Around React is an interactive photo-sharing platform where users can showcase their profiles and upload pictures.
+
+The website includes the following features:
+
+- Profile Section: Displays the user's name and description, with an option to edit these details.
+- Photo Gallery: Users can add and delete photos, with a like functionality on posts. When the like button is clicked, it becomes filled.
+- Pop-ups: All pop-ups can be closed by clicking outside of them or pressing the Esc key.
+- Form Validation: Forms now have validation, and the "Save" button only becomes active when all fields are valid.
+- Object-Oriented Programming (OOP): The code has been restructured with the implementation of classes, improving the organization and structure of the project.
+- API Integration: The project integrates with an API to save data, using authenticated requests with an individual token. We also learned how to interpret the status and response object of requests.
+- React: The project was restructured using React, where we learned about components, state, and lifecycle methods.
+- State Management: The use of Context API was implemented to share information across different parts of the code, and Refs were used to access user input directly.
+
+## 🎯 Objective
+
+The main goal of this project was to build a dynamic and user-friendly photo-sharing platform, while deepening our understanding of JavaScript, React, OOP, and API integration. The focus was to improve the user experience through interactive elements and a structured approach to data handling.
+
+## 🚀 Outcome
+
+Check out the final result:  
+- 🌎 **Live Website**: [Web Project Around React](https://biamsarmento.github.io/web_project_around_react/)
+
+## 🛠️ Technologies and Tools Used
+
+- HTML
+- CSS
+- Java Script
+- Node
+- React
+
+## 📚 What I Learned
+
+This project was crucial in enhancing my Object-Oriented Programming (OOP) skills and provided hands-on experience with API consumption and database requests. Additionally, I refined my front-end development skills, with a focus on form validation, interactive UI components, and request handling.
+
+## 🔧 How to Run the Project
+
+### 📦 Cloning the Repository
+```bash
+git clone https://github.com/biamsarmento/web_project_around_react.git
+cd web_project_around_react
